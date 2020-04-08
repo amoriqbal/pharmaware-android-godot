@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Search.gd" type="Script" id=1]
+[ext_resource path="res://SearchBox.gd" type="Script" id=2]
+[ext_resource path="res://SearchResults.gd" type="Script" id=3]
+[ext_resource path="res://ResRow.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Font/Rosaline Script.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 150
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Font/times-new-roman.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 45
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Font/times-new-roman.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 45
+outline_size = 1
+font_data = SubResource( 5 )
+
+[node name="root" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+url = "http://127.0.0.1:5000/api/search"
+
+[node name="Main" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="VBoxContainer" parent="Main"]
+margin_right = 580.0
+margin_bottom = 407.0
+custom_constants/separation = 20
+
+[node name="HeaderContainer" type="VBoxContainer" parent="Main/Top"]
+margin_right = 580.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 0, 230 )
+alignment = 2
+
+[node name="HeaderText" type="Label" parent="Main/Top/HeaderContainer"]
+margin_top = 66.0
+margin_right = 580.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 2 )
+text = "Pharmaware"
+align = 1
+valign = 1
+
+[node name="SearchBoxContainer" type="MarginContainer" parent="Main/Top"]
+margin_top = 250.0
+margin_right = 580.0
+margin_bottom = 330.0
+rect_min_size = Vector2( 0, 80 )
+custom_constants/margin_right = 40
+custom_constants/margin_left = 40
+
+[node name="TextEdit" type="TextEdit" parent="Main/Top/SearchBoxContainer" groups=[
+"SearchBox",
+]]
+margin_left = 40.0
+margin_right = 540.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 4 )
+caret_blink = true
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Main/Top"]
+margin_top = 350.0
+margin_right = 580.0
+margin_bottom = 407.0
+
+[node name="SearchButton" type="Button" parent="Main/Top/CenterContainer"]
+margin_left = 165.0
+margin_right = 415.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 250, 50 )
+custom_fonts/font = SubResource( 6 )
+text = "Search"
+
+[node name="SearchResults" type="ScrollContainer" parent="Main"]
+margin_top = 447.0
+margin_right = 580.0
+margin_bottom = 1106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SearchResults" type="VBoxContainer" parent="Main/SearchResults"]
+margin_right = 640.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_constants/separation = 30
+script = ExtResource( 3 )
+RowContainerScene = ExtResource( 4 )
+
+[node name="HBoxContainer" parent="Main/SearchResults/SearchResults" instance=ExtResource( 4 )]
+margin_bottom = 50.0
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="pressed" from="Main/Top/CenterContainer/SearchButton" to="." method="_on_SearchButton_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="Main/SearchResults/SearchResults" method="_on_HTTPRequest_request_completed"]
