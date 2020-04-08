@@ -9,22 +9,25 @@ var results:Array
 #var labels:Array
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+	print_debug("****************outside****************")
 	if response_code==200:
 #		results.push_front(JSON.parse(body.get_string_from_utf8()))
 		var bodyParsed=JSON.parse(body.get_string_from_utf8())
 		if bodyParsed.error==OK:
  
-			while not results.empty():
+			while results.size():
+				print_debug("****************inside****************")
 				var r=results.pop_front()
-				if r is Node:
+				if typeof(r)==typeof(RowContainerScene):
+					print_debug("****************freeing*******************");
 					self.remove_child(r.get_ref())
 					r.get_ref().queue_free();
-			#if not bodyParsed.result[0]==null:
-			for ele in bodyParsed.result[0].Products:
-				results.push_back(weakref(RowContainerScene.instance()))
-				#results.back().get_ref().text=JSON.print(ele)
-				results.back().get_ref().rowStringJSON = JSON.print(ele)
-				self.add_child(results.back().get_ref())
+			if bodyParsed.result.size():
+				for ele in bodyParsed.result[0].Products:
+					results.push_back(weakref(RowContainerScene.instance()))
+					#results.back().get_ref().text=JSON.print(ele)
+					results.back().get_ref().rowStringJSON = JSON.print(ele)
+					self.add_child(results.back().get_ref())
 			
 			#$Label.text=bodyParsed.result[0].name
 			#$HBoxContainer.rowStringJSON = String("i am good")
