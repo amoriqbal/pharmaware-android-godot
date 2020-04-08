@@ -37,7 +37,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-url = "http://127.0.0.1:5000/api/search"
+url = "http://pharmaware.herokuapp.com/api/search"
 
 [node name="Main" type="VBoxContainer" parent="."]
 anchor_right = 1.0

@@ -13,8 +13,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	if response_code==200:
 #		results.push_front(JSON.parse(body.get_string_from_utf8()))
 		var bodyParsed=JSON.parse(body.get_string_from_utf8())
-		if bodyParsed.error==OK:
- 
+		if bodyParsed.error==OK: 
 			while results.size():
 				print_debug("****************inside****************")
 				var r=results.pop_front()

@@ -11,4 +11,4 @@ func _on_SearchButton_pressed():
 	
 	var query="{\"search\":\""+$Main/Top/SearchBoxContainer/TextEdit.text+"\"}"
 	var headers = ["Content-Type: application/json"]
-	$HTTPRequest.request(url,headers,false,HTTPClient.METHOD_POST, query)
+	$HTTPRequest.request("https://pharmaware.herokuapp.com/api/search",headers,true,HTTPClient.METHOD_POST, query)
