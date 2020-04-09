@@ -27,16 +27,8 @@ custom_fonts/font = SubResource( 2 )
 valign = 1
 autowrap = true
 
-[node name="Brand" type="Label" parent="."]
-margin_left = 304.0
-margin_right = 524.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 220, 50 )
-size_flags_vertical = 2
-custom_fonts/font = SubResource( 2 )
-
 [node name="Price" type="Label" parent="."]
-margin_left = 528.0
+margin_left = 304.0
 margin_right = 640.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 112, 50 )
