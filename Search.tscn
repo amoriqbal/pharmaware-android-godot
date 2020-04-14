@@ -3,7 +3,7 @@
 [ext_resource path="res://Search.gd" type="Script" id=1]
 [ext_resource path="res://SearchBox.gd" type="Script" id=2]
 [ext_resource path="res://SearchResults.gd" type="Script" id=3]
-[ext_resource path="res://ResRow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://CompoRes.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Font/Rosaline Script.ttf"
@@ -108,16 +108,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SearchResults" type="VBoxContainer" parent="Main/SearchResults"]
-margin_right = 640.0
-margin_bottom = 50.0
+margin_right = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 custom_constants/separation = 30
 script = ExtResource( 3 )
-RowContainerScene = ExtResource( 4 )
-
-[node name="HBoxContainer" parent="Main/SearchResults/SearchResults" instance=ExtResource( 4 )]
-margin_bottom = 50.0
+CompoSearchRes = ExtResource( 5 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 [connection signal="pressed" from="Main/Top/CenterContainer/SearchButton" to="." method="_on_SearchButton_pressed"]
